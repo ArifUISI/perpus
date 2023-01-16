@@ -1,0 +1,366 @@
+/*
+SQLyog Ultimate v12.5.1 (64 bit)
+MySQL - 10.4.20-MariaDB : Database - perpus59
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`perpus59` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `perpus59`;
+
+/*Table structure for table `buku` */
+
+DROP TABLE IF EXISTS `buku`;
+
+CREATE TABLE `buku` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `seri_buku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_anggaran` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomer_klasifikasi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kondisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `buku` */
+
+insert  into `buku`(`id`,`seri_buku`,`tahun_anggaran`,`judul`,`nomer_klasifikasi`,`kondisi`,`kategori`,`status`,`created_at`,`updated_at`) values 
+(7,'01290','2019','buku','0001','Baik','Anak Anak','Di Pinjam',NULL,'2021-10-27 18:57:19');
+
+/*Table structure for table `failed_jobs` */
+
+DROP TABLE IF EXISTS `failed_jobs`;
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `failed_jobs` */
+
+/*Table structure for table `migrations` */
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `migrations` */
+
+insert  into `migrations`(`id`,`migration`,`batch`) values 
+(1,'2014_10_12_000000_create_users_table',1),
+(2,'2014_10_12_100000_create_password_resets_table',1),
+(3,'2019_08_19_000000_create_failed_jobs_table',1),
+(4,'2019_12_14_000001_create_personal_access_tokens_table',1),
+(8,'2021_10_15_153939_create_siswa_table',2),
+(10,'2021_10_19_122427_create_buku_table',4),
+(11,'2021_10_19_122532_create_pinjam_table',5);
+
+/*Table structure for table `password_resets` */
+
+DROP TABLE IF EXISTS `password_resets`;
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `password_resets` */
+
+/*Table structure for table `personal_access_tokens` */
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `personal_access_tokens` */
+
+/*Table structure for table `pinjam` */
+
+DROP TABLE IF EXISTS `pinjam`;
+
+CREATE TABLE `pinjam` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_siswa` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_buku` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tgl_pinjam` date DEFAULT NULL,
+  `tgl_kembali` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `pinjam` */
+
+insert  into `pinjam`(`id`,`id_siswa`,`id_buku`,`tgl_pinjam`,`tgl_kembali`,`created_at`,`updated_at`) values 
+(128,'0084608896','7','2021-10-26','2021-11-01',NULL,NULL),
+(129,'0081334136','7','2021-10-27','2021-11-02',NULL,NULL),
+(130,'0084608896','7','2021-10-27','2021-10-27',NULL,NULL),
+(131,'0084608896','7','2021-10-27','2021-11-02',NULL,NULL),
+(132,'0084608896','7','2021-10-27','2021-11-02',NULL,NULL),
+(133,'0081334136','7','2021-10-27','2021-11-02',NULL,NULL);
+
+/*Table structure for table `siswa` */
+
+DROP TABLE IF EXISTS `siswa`;
+
+CREATE TABLE `siswa` (
+  `id` bigint(255) unsigned NOT NULL AUTO_INCREMENT,
+  `nisn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kelamin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seluler` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `siswa` */
+
+insert  into `siswa`(`id`,`nisn`,`nama`,`kelas`,`kelamin`,`seluler`,`alamat`,`created_at`,`updated_at`) values 
+(1,'008654514','ABELYA VANESSA ANGGREIN','8','Laki Laki','+628585160665','BABATAN GG.1, RT 7, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos','2021-10-19 02:48:36','2021-10-19 13:12:40'),
+(2,'0099309888','ACHMAD FAHIDZIN','7','L','+6281332656534','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(3,'0081334136','ANDHINI EVELYNE WAHYU NOVIANI','7','P','+6283831122819','WIYUNG, RT 2, RW 6, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(4,'0097043671','ARGO WIDI GUMILANG','7','L','+62883896229740','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(5,'0084608896','AURELLIA DELANOVA','7','P','+6287754042449','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(7,'0087610719','DAFA FIRMANSYAH','7','L','+6281230332037','SUMURWELUT, RT 2, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(8,'0075007623','DHINI AMELLIA','7','P','+6288228309285','DK. KRAMAT GG. I-B/58, RT 1, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(9,'0099716315','FANYA AMAYTA MAHACE GINTING','7','P','+6281229661313','PONDOK MARITIM INDAH BLK.RR-17, RT 7, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(10,'0078788622','FAREL AGUNG ANDRIANO','7','L','+628118826320','DK. KARANGAN 6-A/15 A, RT 7, RW 3, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(11,'0063939927','FARREL PUTRA NUGRAHA','7','L','+6285895490071','BUMIARJO 5/60, RT 9, RW 5, Kel. Sawunggaling, Kec. Kec. Wonokromo, Kota SURABAYA, Kodepos 0','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(12,'008547228','HANSEL KRISTIAWAN','7','L','+6281332354142','JL. MEDAYU UTARA XI / KAV.A-18, RT 1, RW 12, Kel. Medokan Ayu, Kec. Kec. Rungkut, Kota SURABAYA, Kodepos 60295','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(13,'0092511545','I KADEK PANJI SANJAYA PUTRA','7','L','+62811331475','BABATAN 3-C/15, RT 6, RW 1, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(14,'0085398715','KEVIN VIVIEKANANDA','7','L','+6289687768754','BABATAN 3, RT 1, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(15,'0081025937','MARIO SANTOSO','7','L','+6282257529656','ASRAMA KOTERM, RT 5, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(16,'0098682374','MARIO YULIAN FABRIZO','7','L','+6287775343043','BABATAN IV-D/25, RT 5, RW 1, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(17,'0082963812','MELBA NATHANIELLA PRIYONO','7','P','+6289516526628','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(18,'0082779321','MICHAEL VIO KURNIA PUTRA PAMUNGKAS','7','L','+6282335240034','JL.KARANG KLUMPRIK BRI 3/27, RT 9, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(19,'0083188696','MUHAMMAD ARDIANSYAH TANJUNG KUSUMA','7','L','+6282165308348','MASTRIP WARUGUNUNG 14, RT 1, RW 1, Kel. Waru Gunung, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(20,'0089256470','NATASHA AZZWA AZZAHRA','7','P','+62881026459792','SUMUR WELUT, RT 1, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(21,'0097699829','NESYA YAYANG RADITA','7','L','+628885372876','SUMURWELUT, RT 6, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(22,'0089028397','NIKYTA AGGNES DJAROT PRABAWATI','7','P','+6281335079092','KLUMPRIK, RT 4, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(23,'0081020613','RADIT ADAM FIRDAUS','7','L','+6288805859889','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(24,'0097687464','ROYANI AZIS','7','P','+6281316660779','PONDOK MARITIM INDAH BLOK AJ/51, RT 11, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(25,'0098318275','SANDY CAHYA PUTRA MANUSIWA','7','L','+6282198314954','DUSUN KAMPUNG BARU, RT -, RW -, Kel. , Kec. , Kota MALUKU TENGAH, Kodepos 97591','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(26,'3095706497','SYIFA SAFIRA','7','P','+6285234802056','BABATAN, RT 6, RW 1, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(27,'0088644906','VINO ADITYA','7','L','+6289521430893','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(28,'3086134479','WAHYU NURUL LAILI HUSAINI','7','P','+6282257279418','WIYUNG, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(29,'0093824480','YEHEZKIEL GARUDA DAMAR BUWONO','7','L','+6281703446431','PESAPEN, RT 4, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(30,'0089592824','ZASKIA ALDYA AZKA','7','P','+62895361309701','WIYUNG, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(31,'0087005347','ADHI PRATAMA SYSYAMSA FIRANA','7','L','+62895410775699','KLUMPRIK, RT 2, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(32,'0098571400','ADIT SETIAWAN MAULANA','7','L','+6289612118010','SUMUR WELUT GG. I, RT 3, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(33,'0089526143','ADITYA JAYA PUTRA PRATAMA','7','L','+6289512412100','SUMURWELUT, RT 7, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(34,'0086019336','AL MAGHFIROH IBROHIM','7','P','+6283857099299','GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(35,'0091968239','AMELIA PUTRI PRADANA','7','P','+6289696556252','INDRAPURA JAYA NO. 189, RT 2, RW 10, Kel. Perak Timur, Kec. Kec. Pabean Cantian, Kota SURABAYA, Kodepos 60164','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(36,'0084753830','ARISQA YASIRLY AMRIA','7','P','+62895335514153','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(37,'0088926158','BAGAS ADIWITYA RAMADHAN','7','L','+628113600820','PONDOK MARITIM INDAH X-28/4, RT 3, RW 8, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(38,'0088509127','DAVA ADITYA','7','L','+6289685230361','SUMURWELUT, RT 6, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(39,'0099523178','DIANA NABILA PUTRI MUWAFIQ','7','P','+6287855589630','BENDUNGAN, RT 2, RW 3, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(40,'0095557071','DIKKA NOER DIANSYAH','7','L','+628989737237','SUMURWELUT, RT 6, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(41,'0089870411','FARELLEO PUTRA PAMUNGKAS','7','L','+6289512420205','KLUMPRIK, RT 2, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(42,'0098912543','FARID DWI SABIL','7','L','+6289529783878','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(43,'0089606043','JESSICA FARA ANAS TASYA','7','P','+6289523309914','WIYUNG, RT 4, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(44,'0091807441','LARAS NINGSIH','7','P','+6281335500207','MENGANTI N0.124 WIYUNG, RT 1, RW 4, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(45,'0081866676','METHA ANITA DIANTY','7','P','+6288217114133','BABATAN I, RT 7, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(46,'3079021110','MUHAMMAD RYAN PRAYUGO','7','L','+6281358593939','DK. KARANGAN RAYA NO.14, RT 3, RW 3, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(47,'0098662357','NAFIDZA REVALINE PUTRI HASNA','7','P','+6289515983896','BANGKINGAN TIMUR V, RT 5, RW 1, Kel. Bangkingan, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(48,'0097855733','NIZAR HARIS SHIDQI','7','L','+6285203270978','BABATAN I, RT 7, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(49,'0091855105','NURISTA DEWI FEBIYANTI','7','P','+62895342297712','PESAPEN, RT 5, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(50,'0083069245','RAKHA RAKSADI KUMARA','7','L','+6288289116182','DK. KRAMAT I/61-A, RT 1, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(51,'0095000831','SASKIA YUAN FEBRIYANTI','7','P','+6282338052706','SUMURWELUT, RT 4, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(52,'0086257594','SESYA ALLKHOLILAH','7','P','+6281248339451','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(53,'0084184110','SHAFY ARYA JECONIAH','7','L','+6281252840844','WIYUNG II/37, RT 2, RW 4, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(54,'0098289195','SISKHA AFRILIA NAFISSA','7','P','+6287775264103','SUMBERAN NO. 4, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(55,'0087202893','THORIQ FIRJA  FASHA ARDHIANSYAH','7','L','+6288217901317','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(56,'0091492691','VITRIA DEWI KHARISMA','7','P','+6282139817463','KLUMPRIK, RT 3, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(57,'0095519376','WANDANA PUTRA ADYANSAH','7','L','+6281232938201','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(58,'0098649478','WANGGA BIMANTA','7','L','+6285730030207','WIYUNG II NO. 73-B, RT 5, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(59,'0083734771','ZULFA FAUZIYAH','7','P','+6281357212535','DK. GOGOR, RT 1, RW 2, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(60,'0083948596','AHMAD ALVINO','7','L','+6285335482966','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(61,'0097466789','AHMAD LINTAR VIANDHIKA FEBRIAN','7','L','+6283114916934','TANK NO.9, RT 7, RW 4, Kel. Karang Pilang, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(62,'0091905053','AIRA DWI NOVIA PUTRI','7','P','+6281333009495','SUMURWELUT, RT 5, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(63,'0089950795','ALMAYDA DHEARTHAQNAN DHARU','7','L','+6289531840037','DK. KRAMAT, RT 1, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(64,'0092703717','ALMIRA PUTRI JOSEPHINE','7','P','+6281331334412','PESAPEN GG. V/12, RT 3, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(65,'0085933449','AMIRA ZEIN MUMTAZ','7','P','+6282244819988','JL. HKSN II/28, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(66,'0092208393','ARTIKA RISMAYANTI','7','P','+6281217190017','PESAPEN, RT 6, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(67,'0092208393','ASYSYIFA`UR RACHMAH','7','P','+6289616006356','BANGKINGAN, RT 2, RW 1, Kel. Bangkingan, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60214','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(68,'0085795197','AUCILLIA KHAYANA NOVA','7','P','+6289612601076','SUMUR WELUT, RT 1, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(69,'0087351200','CARISSA AULIA NOVELINA','7','P','+6285851216423','WIYUNG, RT 5, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(70,'0092828528','DENADA VALENCIA MOVICHA','7','P','+6287704763669','PESAPEN, RT 3, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(71,'0096736863','EKISS LUDO OVALDI','7','L','+6285815725588','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(72,'0094771747','FAREL ARYA WAHYUDI','7','L','+6289616413193','GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(73,'3092506512','FLANESTA BINTANG MAULIDAN','7','L','+6285745403549','WARUGUNUNG, RT 2, RW 2, Kel. Waru Gunung, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(74,'0098737515','GLADIES MEIKEYLA','7','P','+6289504910011','GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(75,'0084717731','IBRAR ARRAFI RAHMANDIVA','7','L','+6281331759272','BABATAN PILANG II/22 [D-8], RT 2, RW 5, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(76,'0082690209','KHAFID AYATULLOH','7','L','+6289697057313','DK. KRAMAT, RT 2, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(77,'0083816295','LAURA RISMA WIDYA TAMA','7','P','+6285230484890','DK KARANGAN, RT 5, RW 3, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(78,'0099271253','MALDIV VERSAILLES CAESAR JUNIOR','7','L','+6281357375939','PESAPEN, RT 3, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(79,'0099972927','MUHAMMAD YUSUF ARIFBILLAH','7','L','+6285330678199','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(80,'0099685052','NARENDRA WIRA PRATAMA','7','L','+6288234289866','KESATRIA 5, RT 3, RW 4, Kel. Karang Pilang, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(81,'0087598726','RADITYA ADRIAN MAULANA','7','L','+6289616732900','WIYUNG 3, RT 3, RW 4, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(82,'3072530531','RANI SITI HAHJIZAH SUGANDA','7','P','+6289503716050','WIYUNG, RT 2, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(83,'0088469511','REIHAN NUR RAMADHAN','7','L','+62881026654032','SUMURWELUT, RT 5, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(84,'0098717063','SALWA FITRIA KESUMA','7','P','+6287854358360','PERUMAHAN KOTERM , RT 3, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(85,'0099753215','SENDY MAULANA PRADANA','7','L','+62895395098404','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(86,'0089121421','SILVIA WAHYU KRISTIANTI','7','P','+6282141196844','BABATAN GG.I, RT 7, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(87,'0083977865','SUNARYONO','7','L','+6289521431003','DK. GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(88,'0085120710','TISA  HELEN HERLISA','7','P','+6281357863619','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(89,'0088357566','WENDRA CAHYA EKA PUTRA','7','L','+6281252770218','DONOWATI 4/45-B, RT 5, RW 1, Kel. Sukomanunggal, Kec. Kec. Sukomanunggal, Kota SURABAYA, Kodepos 60183','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(90,'0098501111','AHMAD FAUZUL AZHIM','7','L','+6281326876131','JL. RAYA BUDURAN , RT 15, RW 5, Kel. , Kec. , Kota SIDOARJO, Kodepos -','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(91,'0098015297','AINI DWI APRILLIA','7','P','+6281232715048','BABATAN 3/13, RT 1, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(92,'0097776962','ALYA NAMIRA QYARA ARSANDA','7','P','+6281234588838','GRAHA KEBRAON REGENCY BLOK. B/12, RT 2, RW 7, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(93,'0092220324','AMANDA PERMATA SUGIRI','7','P','+62895339348993','WIYUNG, RT 1, RW 6, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(94,'0099369976','ANINDYA PUTRI CHOIRUNNISA','7','P','+6285706182579','KLUMPRIK GANG MAKAM, RT 2, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(95,'0092266444','CARISSA NUR CAHYANI','7','P','+62895366714100','SUMUR WELUT, RT 2, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(96,'0091198560','CINTA NATASYA DEVINDA','7','P','+6285730281590','WIYUNG GANG II/41, RT 2, RW 3, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(97,'3083881127','DEVAN AKHDANA SETYA','7','L','+6288217430421','WARUGUNUNG, RT 2, RW 3, Kel. Waru Gunung, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(98,'0091222671','DEVI NAZWA NOVITA SARI','7','P','+6285890650817','KLUMPRIK, RT 4, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(99,'0097058342','ERVIN NASRULLAH','7','L','+6281334809389','GRAHA SUNAN AMPEL BLOK L-14, RT 4, RW 5, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(100,'0089750658','FARRIJ ADINUR RAMAWIJAYA','7','L','+62895339287332','SUMURWELUT, RT 4, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(101,'0089929718','GALIH JOKO SRIYONO','7','L','+62895339413378','WIYUNG 2/40-A, RT 2, RW 3, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(102,'0094498579','ILHAM WICAKSONO','7','L','+62895339382802','PONDOK MARITIM INDAH BLK.QQ-40, RT 10, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(103,'0089413867','IRENE VIANDREA','7','P','+6283841683860','KLUMPRIK, RT 4, RW 2, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(104,'0082081019','KIRANI DWI SEPTIANSYA','7','P','+62895337366726','SUMURWELUT, RT 3, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(105,'0083566190','LUNA AURELIA ORIENTHALITA WANDA','7','P','+6283854717782','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(106,'0086996804','MAHESA WHISNU','7','L','+626.28816E+16','PESAPEN 3/35A, RT 3, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(107,'0076614665','MOCH. DINO PRAYOGI','7','L','+6285792237074','WIYUNG, RT 2, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(108,'0094940534','MUHAMMAD RAFID ADHYASTA','7','L','+6283856587338','DK. KRAMAT, RT 1, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(109,'3089170241','NABIL BINTANG AL - FARIZI WH','7','L','+6282337648184','SUMBERAN NO. 44, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(110,'0085681361','NAURA CAHYA RAMADHANI','7','P','+6289696783952','DK. GOGOR GG - 3/30-B, RT 3, RW 2, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(111,'0089837063','RAFA BAGUS PRIMA JAYA','7','L','+6283841770184','WIYUNG, RT 2, RW 3, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(112,'0094180680','REFAN ARSHAVIN ARLANSYAH','7','L','+6283857231131','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(113,'0099353379','REVA AURA ALIFIA','7','P','+6287852659880','SUMURWELUT, RT 3, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(114,'0096419964','SHEVA ALFIAN HARIANTO','7','L','+6289517810005','GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(115,'0088030827','SYAHRIEL ARDIANSYAH','7','L','+6281803131643','BENDUNGAN, RT 1, RW 3, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(116,'0085894818','SYIFA AULIA RIZCA NURUL NAVHISA','7','P','+62881026488337','DK. KARANGAN TENGAH, RT 5, RW 3, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(117,'0088350232','UBAID DWI YOFIANSYAH','7','L','+6283830091613','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(118,'0081808607','WISNU ADY UTAMA','7','L','+6289665372375','BENDUNGAN, RT 1, RW 3, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(119,'0083196303','YESI KUMALA SARI','7','P','+6285784828758','WIYUNG I, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(120,'0088904766','ALVINO PUTRA NOVELIANSYA','7','L','+628991617371','SUMURWELUT, RT 3, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(121,'0096346723','ANAERA AFKARINA','7','P','+6285859903072','BABATAN, RT 6, RW 1, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(122,'0083476331','ANANDA VICO ARDIANSYAH','7','L','+6287857649103','PESAPEN, RT 5, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(123,'0087172363','ANDHIKA WAHYU ARDIANSYAH','7','L','+6289655437080','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(124,'0078062039','ARDIANSYAH','7','L','+6281254269200','WIYUNG, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(125,'0083535566','CHERYN FITRI AURELLA','7','P','+6281703124865','GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(126,'0089033466','CHIKO RIZKI ANUGRA PRATAMA','7','L','+6288228436064','SUMURWELUT, RT 4, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(127,'0099754924','CYNTHIA DWI LESTARI','7','P','+6282230612434','JL. WIYUNG GG. MANGGA 5/35, RT 2, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(128,'0091142204','DEWI DHYANA ASTUTI','7','P','+6281338142770','JL. SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(129,'0082006716','FAIS TRI SYARIL RAMADHAN','7','L','+6281242373543','WIYUNG, RT 2, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(130,'0099491190','GIOVANI CHYNTIA LAURA','7','P','+6289525031554','MANUKAN KRAJAN 4/21, RT 3, RW 13, Kel. Manukan Kulon, Kec. Kec. Tandes, Kota SURABAYA, Kodepos 60185','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(131,'0072059136','HAFIDH ALY YAHYA','7','L','+6281803513680','DK. KRAMAT, RT 4, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(132,'0099402004','HILMAN REKSADANA','7','L','+6289612052452','BUKIT SUMBERAN INDAH NO.A4, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(133,'0082546150','IRSYADIAH PUTRI NABILA','7','P','+6289646636261','SUMURWELUT, RT 5, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(134,'0092233787','KEY`SYA PUTRI ERVIA','7','P','+6285733600749','WIYUNG, RT 2, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(135,'0088629642','LUTFI RAKHA FAKRUDIN','7','L','+6289515152201','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(136,'0088978319','M. FAIZ RAMADHAN','7','L','+62895605275196','SUMURWELUT, RT 6, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(137,'0082916744','MAS `ABI FIRMANSYAH','7','L','+6289680872262','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(138,'0082644902','MUHAMAD ADHITYA RAMADAN','7','L','+6289636966859','SUMURWELUT, RT 7, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(139,'0082837592','MUHAMMAD ARMADHANI','7','L','+6282140721115','BABATAN, RT 4, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(140,'3080844770','NAFISA HINDI NABILA','7','P','+6282228170918','BABATAN 3, RT 5, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(141,'0095669694','NAZRIEL ARDINIO REYVAN','7','L','+6283856677229','WIYUNG, RT 2, RW 4, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(142,'0086716621','REVABELLA ARDELINA ARIJANTO','7','P','+6282131581735','KARANG KLUMPRIK BARAT VI/3, RT 6, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(143,'0094597402','RISTY DWI JULIANTI','7','P','+6281911211267','DK. GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(144,'0087563862','SULTAN RAMADANI','7','L','+6285855351594','BABATAN GG. 2, RT 4, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(145,'0091413035','SYNTA PUTRI PRAMESTI','7','P','+6285895954835','WIYUNG, RT 2, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(146,'3092529415','TATIA EKA RAHIMAH','7','P','+62881036028887','WARUGUNUNG, RT 4, RW 2, Kel. Waru Gunung, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(147,'0088059437','VICO DWI ALDIANSYAH','7','L','+6283854607282','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(148,'0089993803','YOLANDA PUTRI OCTAVIA','7','P','+6282244457453','WIYUNG I/37, RT 3, RW 1, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(149,'0081794269','ZAHRA NATHANIA REVALIYANTI','7','P','+6282250961927','SUMBERAN, RT 1, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(150,'0092429799','AMANDA TALITHA','7','P','+6289524273240','DK. GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(151,'0092521307','ANDINI AUWALIA NUR FADILLA','7','P','+6283857397770','WIYUNG, RT 1, RW 6, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(152,'0097391740','ANDRA HASTAMA','7','L','+6285854544717','WIYUNG, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(153,'0088054721','ANNISA VIDIA MAHARANI','7','P','+6285735349901','TELUK BONE TENGAH 8-A, RT 6, RW 4, Kel. Perak Utara, Kec. Kec. Pabean Cantian, Kota SURABAYA, Kodepos 60165','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(154,'0091438170','ARYO BAGUS MAULANA','7','L','+6288226296720','WIYUNG GG - II/53-B, RT 4, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(155,'0084952172','BAKTI DAVA KIRANA','7','L','+6283857708183','BENDUNGAN, RT 1, RW 3, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(156,'0092118358','DANOVAN HIROMICHI SODIKIN','7','L','+6281331399388','JL. MERPATI III/9 GEMPOL, RT 3, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(157,'0097371948','DEVAN HADI WAHYU USTYO NUR CAHYO','7','L','+628816239165','PESAPEN, RT 6, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(158,'0098618964','DHAMAR AJI','7','L','+6285755657967','DK. KRAMAT, RT 1, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(159,'0075349230','FAHRI AKBAR','7','L','+6285790830427','KEDUNG COWEK 8/53, RT 4, RW 1, Kel. Kedung Cowek, Kec. Kec. Bulak, Kota SURABAYA, Kodepos 60125','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(160,'0085476418','GREECIA ALYARIZKY','7','P','+6282139403679','DK. KRAMAT, RT 3, RW 4, Kel. Jajar Tunggal, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60229','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(161,'0075374458','HERTA FANDU FINANDA','7','P','+6285648062367','WIYUNG, RT 1, RW 3, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(162,'0092116851','JANUARTA HANIONO PRATAMA','7','L','+6285755866781','JL. TANK NO. 12 - A, RT 6, RW 4, Kel. Karang Pilang, Kec. Kec. Karangpilang, Kota SURABAYA, Kodepos 60221','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(163,'0086427435','MUHAMMAD  NUR HIDAYAH','7','L','+6287853454085','SUMURWELUT, RT 2, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(164,'0094935532','MIKAYLA AINNUR YAHYA','7','P','+6282228147570','WIYUNG, RT 1, RW 3, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(165,'0086854479','MUHAMMAD ALVIAN PRAMANA','7','L','+6285850733159','GEMPOL, RT 1, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(166,'0081181158','MUHAMMAD JOYO SANGKAR PRAYUGO','7','L','+6289503312784','WIYUNG I/41, RT 1, RW 2, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(167,'0082173967','MUHAMMAD RIZAL FACHRIY','7','L','+6289678450345','PESAPEN, RT 1, RW 2, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(168,'0092450971','NASYWA AULIA ZAHRA','7','P','+6281252980216','KARANG KLUMPRIK SELATAN 40, RT 1, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(169,'0095790755','REVALINA MEIVIA YOLANDA','7','P','+6285790877183','RAYA MENGANTI NO.14, RT 1, RW 5, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(170,'0084615285','RIZKY MACHFUDIN INDRIANTO PUTRA','7','L','+628816939752','PETEMON KUBURAN 84, RT 6, RW 2, Kel. Sawahan, Kec. Kec. Sawahan, Kota SURABAYA, Kodepos 60261','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(171,'0082772281','ROBBIAL NOVAL ARDIANSYAH','7','L','+6287757927744','SUMURWELUT, RT 2, RW 1, Kel. Sumurwelut, Kec. Kec. Lakarsantri, Kota SURABAYA, Kodepos 60215','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(172,'0088748669','SELVIRA JULIA PUTRI','7','P','+6281333905755','RAYA WIYUNG 16, RT 2, RW 5, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(173,'0091897816','SYAFA DINARA PUTRI ALEKA','7','P','+6281515614882','KR. KLUMPRIK SELATAN. 3/16, RT 1, RW 6, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(174,'0086920599','TABHITA PUTRI FIRANSYAH','7','P','+6289613473050','WIYUNG, RT 3, RW 6, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(175,'0093300413','VANESSA ALYSIA','7','P','+6282131426910','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(176,'0084307413','VIONA PUTRI SILVYA MARGARETA','7','P','+6281225543105','WIYUNG 3/48, RT 4, RW 6, Kel. Wiyung, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60228','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(177,'0086530885','YUDHA PRATAMA','7','L','+6282338839340','BABATAN II, RT 5, RW 2, Kel. Babatan, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60227','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(178,'0096371952','ZAHRO SAFA NURAINI','7','P','+6289699205187','SUMBERAN, RT 2, RW 4, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36'),
+(179,'0094964218','ARYA MAULANA IBRAHIM','7','L','+62895342297786','DK. GEMPOL, RT 2, RW 3, Kel. Balas Klumprik, Kec. Kec. Wiyung, Kota SURABAYA, Kodepos 60222','2021-10-19 02:48:36','2021-10-19 02:48:36');
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roleuser` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`roleuser`,`remember_token`,`created_at`,`updated_at`) values 
+(1,'Arief Syahputra','tepok420@gmail.com',NULL,'$2y$10$vCveJTAjjyFgpCMKfwd0o.t7.j5tAFoTVcygURFZ8U2hNjCfi3haW','Admin',NULL,'2021-10-15 14:40:20','2021-10-15 14:40:20');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
